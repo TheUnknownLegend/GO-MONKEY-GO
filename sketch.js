@@ -9,7 +9,7 @@ var gameover, gameover1;
 
 var RUNNING = 0;
 var END = 1;
-var gameState = 1;
+var gameState = 0;
 
 function preload() {
 
