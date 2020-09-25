@@ -66,13 +66,13 @@ function draw() {
       FoodGroup.destroyEach();
       score = score + 1;
       sound1.play();
-
+    }
 
       if (obstacleGroup.isTouching(monkey)) {
         gameState = END;
         sound2.play();
       }
-    }
+    
   } else if (gameState === END) {
     FoodGroup.destroyEach();
     obstacleGroup.destroyEach();
