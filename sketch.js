@@ -28,12 +28,12 @@ function preload() {
 
 
 function setup() {
-  createCanvas(600, 600);
-  background1 = createSprite(300, 300, 3, 3);
+  createCanvas(windowWidth, windowHeight);
+  background1 = createSprite(width/2, height/2, 7, 7);
   background1.addImage("background", background2)
-  background1.scale = 3.5;
+  background1.scale = 8;
 
-  ground = createSprite(300, 580, 800, 10);
+  ground = createSprite(width/2, height-20, 2000, 10);
   ground.shapeColor = "lightgrey";
 
   monkey = createSprite(100, 520, 1, 1);
@@ -48,7 +48,7 @@ function setup() {
 function draw() {
 
   //jump when the space key is pressed
-  if (keyDown("space") && monkey.y >= 400) {
+  if (keyDown("space") && monkey.y >=900) {
     monkey.velocityY = -13;
   }
 
@@ -66,14 +66,15 @@ function draw() {
       FoodGroup.destroyEach();
       score = score + 1;
       sound1.play();
-    }
+
 
       if (obstacleGroup.isTouching(monkey)) {
         gameState = END;
         sound2.play();
       }
-    
+    }
   } else if (gameState === END) {
+    background(background2)
     FoodGroup.destroyEach();
     obstacleGroup.destroyEach();
 
@@ -84,15 +85,15 @@ function draw() {
       gameState = RUNNING;
     }
 
-    fill("red");
+    fill("cyan");
     textFont("Curlz MT");
-    textSize(30);
-    text("You Died", 280, 270);
+    textSize(40);
+    text("You Died",  width/2.2, height/2 -100);
 
     fill("brown");
-    textFont("Curlz MT");
-    textSize(30);
-    text("Press 'R' to Restart", 240, 300);
+    textFont("Algerian");
+    textSize(40);
+    text("Press 'R' to Restart", width/2.6, height/2.24 );
 
   }
 
@@ -104,7 +105,7 @@ function draw() {
 
 function food() {
   if (frameCount % 200 === 0) {
-    banana = createSprite(520, 530, 1, 1);
+    banana = createSprite(width - 20, height-50, 1, 1);
     banana.addImage("baanaanaa", bananaImage);
     banana.scale = 0.15;
     banana.velocityX = -8;
@@ -116,7 +117,7 @@ function food() {
 
 function obstacleSpawner() {
   if (frameCount % 300 === 0) {
-    obstacle = createSprite(520, 530, 1, 1);
+    obstacle = createSprite(width - 20, height-80, 1, 1);
     obstacle.addImage("itsArock", obstacleImage);
     obstacle.scale = 0.3;
     obstacle.velocityX = -(7.5 + 3 * score / 5);
